@@ -2,7 +2,7 @@ const BaseComponent = require("./base.component");
 
 class CatalogueTitleComponent extends BaseComponent{
     constructor() {
-        super(".app_logo");
+        super("//*[@class='app_logo']");
     }
 
     get textTitle() {
