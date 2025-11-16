@@ -32,26 +32,32 @@ Assertions: Use from the selected framework;
 [Optional] Loggers: Use from the selected framework.
 
 Project structure:
-po:
-  pages:
-    base.page.js (base)
-    catalogue.page.js (second page where we need to validate title after successfully logging in)
-    index.js (re-export of pages)
-    login.page (first page where we try to log in)
-  components:
-    base.component.js (base)
-    catalogue-title.component.js (title we need to validate in UC-3 after successfully logging in)
-    error-message.component.js (error message we check in UC-1 and UC-2)
-    index.js (re-export of components)
-    login.component.js (form with input we need to fill with data in UC-1 and UC-2)
-config:
-  wdio.config.js (WDIO configuration file)
-test:
-  data:
-    testData.json (data for parametrize tests)
-  specs:
-    simple.tests.js (main tasting file)
-index.js (re-export)
 
+po:
+  index.js (re-export);
+  
+  pages:
+    base.page.js (base),
+    catalogue.page.js (second page where we need to validate title after successfully logging in),
+    index.js (re-export of pages),
+    login.page (first page where we try to log in);
+    
+  components:
+    base.component.js (base),
+    catalogue-title.component.js (title we need to validate in UC-3 after successfully logging in),
+    error-message.component.js (error message we check in UC-1 and UC-2),
+    index.js (re-export of components),
+    login.component.js (form with input we need to fill with data in UC-1 and UC-2);
+    
+config:
+  wdio.config.js (WDIO configuration file);
+  
+test:
+
+  data:
+    testData.json (data for parametrize tests);
+    
+  specs:
+    simple.tests.js (main testing file);
 
 To run tests use command: npm test
