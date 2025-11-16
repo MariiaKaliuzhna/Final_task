@@ -1,32 +1,37 @@
 const { pages } = require("./../../po");
+const fs = require("fs");
+const path = require("path");
 
-describe ("Website", async() => {
-    beforeEach (async() => {
-        await browser.url("/");
-    });
-
-    it ("Open web page", async() => {
-        await expect(browser).toHaveTitle("Swag Labs");
-        await browser.pause(1000);
-    });
-});
+const testData = JSON.parse(fs.readFileSync("src/test/data/testData.json", "utf-8"));
 
 describe ("Login", async() => {
     beforeEach (async() => {
         await browser.url("/");
     });
 
-    it ("Login without username", async() => {
-        const loginInput = await pages("login").loginInput;
-        await loginInput.input("username").setValue("test");
-        await loginInput.input("password").setValue("test");
+    testData.forEach(data => {
+        it(`${data.id} : ${data.name} `, async() => {
+            const loginInput = pages("login").loginInput;
+            await Promise.all([
+                loginInput.input("username").setValue(data.username),
+                loginInput.input("password").setValue(data.password)
+            ]);
 
-        await loginInput.clearField(loginInput.input("username"));
-        await loginInput.clearField(loginInput.input("password"));
+            if (!data.isPositiveTesting){
+                if (data.expectedResult === "Epic sadface: Username is required"){
+                    await loginInput.clearField(loginInput.input("username"));
+                    await loginInput.clearField(loginInput.input("password"));
+                } else 
+                    await loginInput.clearField(loginInput.input("password"));
+            }
 
-        await pages("login").loginInput.loginBtn.click();
+            await pages("login").loginInput.loginBtn.click();
 
-        await pages("login").errorMessage.errorText.waitForDisplayed();
-        await expect(pages("login").errorMessage.errorText).toHaveText("Epic sadface: Username is required");
+            if (!data.isPositiveTesting){
+                await pages("login").errorMessage.errorText.waitForDisplayed();
+                await expect(pages("login").errorMessage.errorText).toHaveText(data.expectedResult);
+            } else 
+                await expect(pages("catalogue").catalogueTitle.textTitle).toHaveText("Swag Labs");
+        });
     });
 });
