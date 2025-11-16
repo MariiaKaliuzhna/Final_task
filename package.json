@@ -11,5 +11,9 @@
   },
   "scripts": {
     "test": "wdio run src/config/wdio.conf.js"
+  },
+  "dependencies": {
+    "@wdio/logger": "^8.13.0",
+    "chalk": "^4.1.2"
   }
 }
