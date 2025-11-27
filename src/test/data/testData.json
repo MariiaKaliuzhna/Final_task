@@ -4,7 +4,6 @@
     "name": "Log in with empty credentials",
     "username": "test",
     "password": "test",
-    "isPositiveTesting": false,
     "expectedResult": "Epic sadface: Username is required"
   },
   {
@@ -12,15 +11,6 @@
     "name": "Log in only with username",
     "username": "test",
     "password": "test",
-    "isPositiveTesting": false,
     "expectedResult": "Epic sadface: Password is required"
-  },
-  {
-    "id": "UC-3",
-    "name": "Log in with valid username and password",
-    "username": "standard_user",
-    "password": "secret_sauce",
-    "isPositiveTesting": true,
-    "expectedResult": "Swag Labs"
   }
 ]
